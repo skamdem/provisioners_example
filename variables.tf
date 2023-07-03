@@ -1,5 +1,6 @@
-variable "my_ip" {} // my ip address for sshing on port 22 
+# variables definition for "provisioners_example" project
 
+# General variables
 variable "region" {
   type        = string
   description = "Default region for aws provider"
@@ -7,17 +8,28 @@ variable "region" {
 
 variable "cidr_block" {
   type        = string
-  default     = "10.0.0.0/16"
   description = "cidr_block of the vpc in this example"
 }
 
 variable "availability_zone" {
   type        = string
-  default     = "us-east-1a"
   description = "availability zone of subnet in this example"
 }
+
+# EC2 variables
+variable "my_ip" {} // my ip address for sshing on port 22 
 
 variable "nginx_version" {
   type        = string
   description = "version of nginx we wish to download and install"
+}
+
+variable "public_key" {
+  type        = string
+  description = "public key to ssh into nginx server"
+}
+
+variable "instance_type" {
+  type        = string
+  description = "type of instance"
 }

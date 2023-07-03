@@ -1,3 +1,5 @@
+# Networking resources
+
 resource "aws_vpc" "vpc" {
   cidr_block = var.cidr_block
 }
@@ -27,11 +29,28 @@ resource "aws_route_table_association" "gateway_route" {
   route_table_id = aws_route_table.public_rt.id
 }
 
-resource "aws_security_group" "provisioners_example_sg" {
+resource "aws_security_group" "instance_sg" {
   name   = "provisioners-example-sg"
   vpc_id = aws_vpc.vpc.id
+
   ingress {
-    from_port = 22
-    to_port   = 22
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["${var.my_ip}/32"]
+  }
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }

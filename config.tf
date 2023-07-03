@@ -9,11 +9,11 @@ terraform {
     dynamodb_table = "devops-demo-tfstate-lock"
     encrypt        = true
   }
-}
 
-required_providers {
-  aws = {
-    source  = "hashicorp/aws"
-    version = "~> 5.4.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.6.2"
+    }
   }
 }
