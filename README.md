@@ -1,6 +1,7 @@
 # Example of Terraform Provisioner
 
-> This project runs a script remotely on an instance after it has been created
+> This project runs a script remotely (we are using _remote-exec_ type of provisioner) on an instance after it has been created.
+> Said script, which consists in a list of strings, installs the web server/proxy program called _nginx_ and starts _nginx_ on port 80.
 
 ## Part one: _main_ branch
 > Create a *provisioner* block inside of resource ***aws_instance***. This entails setting up a *connection* block (also inside of resource ***aws_instance***) to tell the *provisioner* how to connect to the EC2 instance
@@ -26,7 +27,7 @@ connection {
 > Note : in AWS, a *provisioner* block is executed as ***ec2-user*** which is a limited access user. Hence it is necessary to elevate to ***root*** by prefixing our commands with ***sudo*** in the script in order to make system changes (such as installing nginx).
 
 ## Part two: _sub_ branch
-> Use attribute *user_data*, inside of resource ***aws_instance***, which is another way of achieving the same outcome.
+> Use attribute *user_data*, inside of resource ***aws_instance***, which is another way of achieving the same outcome as in part 1 above.
 ```
 user_data = <<EOF
     #!/bin/bash
