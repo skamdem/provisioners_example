@@ -27,6 +27,14 @@ resource "aws_instance" "nginx_instance" {
     "Terraform" = "Yes"
   }
 
+  connection {
+    host        = aws_instance.nginx_instance.public_ip
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file(var.private_key_path)
+    agent       = "true"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "sudo amazon-linux-extras enable nginx${var.nginx_version}",
@@ -35,13 +43,5 @@ resource "aws_instance" "nginx_instance" {
       "echo \"Hello from our nginx server in AWS\" > /usr/share/nginx/html/index.html",
       "sudo systemctl start nginx",
     ]
-  }
-
-  connection {
-    host        = aws_instance.nginx_instance.public_ip
-    type        = "ssh"
-    user        = "ec2-user"
-    private_key = file(var.private_key_path)
-    agent       = "true"
   }
 }
