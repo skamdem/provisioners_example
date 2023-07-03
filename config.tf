@@ -6,7 +6,7 @@ terraform {
     bucket         = "devops-demos-terraform-state-bucket"
     key            = "provisioners_example"
     region         = "us-east-1"
-    dynamodb_table = "devops-demo-tfstate-lock"
+    dynamodb_table = "devops-demos-tfstate-lock"
     encrypt        = true
   }
 

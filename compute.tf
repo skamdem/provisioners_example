@@ -16,7 +16,7 @@ data "aws_ami" "ami" {
 }
 
 resource "aws_instance" "nginx_instance" {
-  ami                    = data.aws_ami.ami
+  ami                    = data.aws_ami.ami.image_id
   instance_type          = var.instance_type
   subnet_id              = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.instance_sg.id]
