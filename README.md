@@ -1,6 +1,7 @@
 # Example of Terraform Provisioner
 
 > This project runs a script remotely (we are using _remote-exec_ type of provisioner) on an instance after it has been created.
+
 > Said script, which consists in a list of strings (each element in the list corresponds to a line in our script), installs the web server/proxy program called _nginx_ and starts _nginx_ on port 80.
 
 ## Part one: _main_ branch
