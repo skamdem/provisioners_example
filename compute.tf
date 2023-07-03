@@ -23,7 +23,7 @@ resource "aws_instance" "nginx_instance" {
   key_name               = aws_key_pair.keypair.key_name
 
   tags = {
-    Name        = "prov-example"
+    Name        = "${local.resources_tag}"
     "Terraform" = "Yes"
   }
 
