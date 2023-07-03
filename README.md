@@ -2,7 +2,7 @@
 
 > This project runs a script remotely on an instance after it has been created
 
-## Part one (_main_ branch)
+## Part one: _main_ branch
 > Create a *provisioner* block inside of resource ***aws_instance***. This entails setting up a *connection* block (also inside of resource ***aws_instance***) to tell the *provisioner* how to connect to the EC2 instance
 
 ```
@@ -25,7 +25,7 @@ connection {
 ```
 > Note : in AWS, a *provisioner* block is executed as ***ec2-user*** which is a limited access user. Hence it is necessary to elevate to ***root*** by prefixing our commands with ***sudo*** in the script in order to make system changes (such as installing nginx).
 
-## Part two (_sub_ branch)
+## Part two: _sub_ branch
 > Use attribute *user_data*, inside of resource ***aws_instance***, which is another way of achieving the same outcome.
 ```
 user_data = <<EOF
