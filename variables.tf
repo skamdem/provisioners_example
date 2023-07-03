@@ -29,6 +29,11 @@ variable "public_key" {
   description = "public key to ssh into nginx server"
 }
 
+variable "private_key_path" {
+  type        = string
+  description = "path to private key"
+}
+
 variable "instance_type" {
   type        = string
   description = "type of instance"

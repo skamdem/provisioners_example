@@ -2,10 +2,16 @@
 
 resource "aws_vpc" "vpc" {
   cidr_block = var.cidr_block
+  tags = {
+    Name = "prov-example"
+  }
 }
 
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.vpc.id
+  tags = {
+    Name = "prov-example"
+  }
 }
 
 resource "aws_subnet" "public_subnet" {

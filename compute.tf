@@ -22,6 +22,11 @@ resource "aws_instance" "nginx_instance" {
   vpc_security_group_ids = [aws_security_group.instance_sg.id]
   key_name               = aws_key_pair.keypair.key_name
 
+  tags = {
+    Name        = "prov-example"
+    "Terraform" = "Yes"
+  }
+
   provisioner "remote-exec" {
     inline = [
       "sudo amazon-linux-extras enable nginx${var.nginx_version}",
@@ -36,6 +41,7 @@ resource "aws_instance" "nginx_instance" {
     host        = aws_instance.nginx_instance.public_ip
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("/ssh_key/nginx_key")
+    private_key = file(var.private_key_path)
+    agent       = "true"
   }
 }
