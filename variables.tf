@@ -29,6 +29,16 @@ variable "public_key" {
   description = "public key to ssh into nginx server"
 }
 
+variable "username" {
+  type        = string
+  description = "user name for connecting"
+}
+
+variable "connection_protocol" {
+  type        = string
+  description = "protocol used for connecting"
+}
+
 variable "private_key_path" {
   type        = string
   description = "path to private key"

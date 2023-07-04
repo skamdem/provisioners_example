@@ -35,6 +35,7 @@ resource "aws_route_table_association" "gateway_route" {
   route_table_id = aws_route_table.public_rt.id
 }
 
+# THis security group allows HTTP and SSH access
 resource "aws_security_group" "instance_sg" {
   name   = "provisioners-example-sg"
   vpc_id = aws_vpc.vpc.id

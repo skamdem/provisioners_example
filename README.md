@@ -2,7 +2,7 @@
 
 > This project runs a script remotely (we are using _remote-exec_ type of provisioner) on an instance after it has been created.
 
-> Said script, which consists in a list of strings (each element in the list corresponds to a line in our script), installs the web server/proxy program called _nginx_ and starts _nginx_ on port 80.
+> Said script, which consists in a list of strings (each element in the list corresponds to a line in our script), installs the web server/proxy program called _nginx_ on an EC2 and starts _nginx_ on port 80.
 
 ## Part one: _main_ branch
 > Create a *provisioner* block inside of resource ***aws_instance***. This entails setting up a *connection* block (also inside of resource ***aws_instance***) to tell the *provisioner* how to connect to the EC2 instance
