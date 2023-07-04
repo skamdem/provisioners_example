@@ -19,11 +19,6 @@ variable "availability_zone" {
 # EC2 variables
 variable "my_ip" {} // my ip address for sshing on port 22 
 
-variable "public_key" {
-  type        = string
-  description = "public key to ssh into nginx server"
-}
-
 variable "username" {
   type        = string
   description = "user name for connecting"
@@ -32,6 +27,11 @@ variable "username" {
 variable "connection_protocol" {
   type        = string
   description = "protocol used for connecting"
+}
+
+variable "public_key_path" {
+  type        = string
+  description = "path to public key"
 }
 
 variable "private_key_path" {

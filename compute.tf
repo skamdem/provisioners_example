@@ -9,7 +9,7 @@
 # }
 resource "aws_key_pair" "keypair" {
   key_name   = "nginx_key"
-  public_key = var.public_key
+  public_key = file(var.public_key_path)
 }
 
 data "aws_ami" "ami" {
