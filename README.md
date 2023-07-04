@@ -10,7 +10,7 @@
 ```
 provisioner "remote-exec" {
     inline = [
-        "sudo amazon-linux-extras enable nginx${nginx_version}",
+        "sudo amazon-linux-extras enable nginx1",
         "sudo yum -y install nginx",
         "sudo chmod 777 /usr/share/nginx/html/index.html",
         "echo \"Hello from our nginx server in AWS\" > /usr/share/nginx/html/index.html",        
@@ -35,7 +35,7 @@ user_data = <<EOF
     set -ex
 
     yum update -y
-    amazon-linux-extras enable nginx${nginx_version}
+    amazon-linux-extras enable nginx1
     yum -y install nginx
     chmod 777 /usr/share/nginx/html/index.html
     echo "Hello from our nginx server in AWS" > /usr/share/nginx/html/index.html
