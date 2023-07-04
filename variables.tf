@@ -19,11 +19,6 @@ variable "availability_zone" {
 # EC2 variables
 variable "my_ip" {} // my ip address for sshing on port 22 
 
-variable "nginx_version" {
-  type        = string
-  description = "version of nginx we wish to download and install"
-}
-
 variable "public_key" {
   type        = string
   description = "public key to ssh into nginx server"
