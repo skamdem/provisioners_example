@@ -47,15 +47,18 @@ resource "aws_instance" "nginx_instance" {
   #   We run a remote provisioner on the instance after creating it.
   #   In this case, we install nginx and start it. By default,
   #   this should be on port 80
-
   provisioner "remote-exec" {
     inline = [
       "sudo amazon-linux-extras enable nginx1",
       "sudo yum -y install nginx",
       "sudo chmod 777 /usr/share/nginx/html/index.html",
-      "echo \"Hello from our nginx server in AWS\" > /usr/share/nginx/html/index.html",
+      "echo \"Hello from our nginx server in AWS through PROVISIONER\" > /usr/share/nginx/html/index.html",
       "sudo systemctl start nginx",
     ]
+  }
+
+  provisioner "local-exec" {
+    command = "curl http://${aws_instance.nginx_instance.public_ip}"
   }
 }
 
