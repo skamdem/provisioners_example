@@ -34,52 +34,19 @@ resource "aws_instance" "nginx_instance" {
     "Terraform" = "Yes"
   }
 
-  #   The connection block tells our provisioner how to
-  #   communicate with the instance
-  connection {
-    host        = aws_instance.nginx_instance.public_ip
-    type        = var.connection_protocol
-    user        = var.username
-    private_key = file(var.private_key_path)
-    agent       = "false" //use the local SSH agent for authentication
-  }
-
-  #   We run a remote provisioner on the instance after creating it.
-  #   In this case, we install nginx and start it. By default,
+  #   AWS built-in way of running the script on the instance upon starting it.
+  #   The script installs nginx and starts it. By default,
   #   this should be on port 80
+  user_data = <<EOF
+    #!/bin/bash
+    set -ex
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo amazon-linux-extras enable nginx1",
-      "sudo yum -y install nginx",
-      "sudo chmod 777 /usr/share/nginx/html/index.html",
-      "echo \"Hello from our nginx server in AWS\" > /usr/share/nginx/html/index.html",
-      "sudo systemctl start nginx",
-    ]
-  }
+    yum update -y
+    amazon-linux-extras enable nginx1
+    yum -y install nginx
+    chmod 777 /usr/share/nginx/html/index.html
+    echo "Hello from nginx on AWS with USER DATA" > /usr/share/nginx/html/index.html
+    systemctl start nginx
+  EOF
 }
 
-# resource "null_resource" "test_ssh_from_windows" {
-
-#   connection {
-#     host        = aws_instance.nginx_instance.public_ip
-#     type        = var.connection_protocol
-#     user        = var.username
-#     private_key = file(var.private_key_path)
-#     agent       = "false" //use the local SSH agent for authentication
-#   }
-
-#   provisioner "remote-exec" {
-#     inline = [
-#       "sudo amazon-linux-extras enable nginx1",
-#       "sudo yum -y install nginx",
-#       "sudo chmod 777 /usr/share/nginx/html/index.html",
-#       "echo \"Hello from our nginx server in AWS\" > /usr/share/nginx/html/index.html",
-#       "sudo systemctl start nginx",
-#     ]
-#   }
-
-#   provisioner "local-exec" {
-#     command = "curl http://${aws_instance.nginx_instance.public_ip}"
-#   }
-# }

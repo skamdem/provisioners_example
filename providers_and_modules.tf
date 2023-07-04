@@ -7,5 +7,5 @@ provider "null" {
 }
 
 locals {
-  resources_tag = "prov-example"
+  resources_tag = "user-data-example"
 }
